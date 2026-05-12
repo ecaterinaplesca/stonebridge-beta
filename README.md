@@ -1,2 +1,2 @@
-# Stonebridge Ledger — Homepage Beta
+# Stonebridge Ledger
 https://ecaterinaplesca.github.io/stonebridge-beta/
