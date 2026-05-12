@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stonebridge Ledger — Bookkeeping & Financial Advisory Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #162847;
+      --navy-light: #1e3a5f;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --white: #ffffff;
+      --off-white: #f8f7f4;
+      --text: #1a1a2e;
+      --text-muted: #5a6a7a;
+      --border: #e0ddd8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: var(--off-white);
+      background-image:
+        linear-gradient(rgba(15,31,61,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,31,61,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 0.75rem;
+      line-height: 1.7;
+    }
+
+    .hero-sub {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-checks {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .hero-check::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--navy);
+      padding: 4rem 2rem;
+    }
+
+    .stats-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 5rem 2rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--navy); }
+
+    .services .section-title { color: var(--white); }
+    .services .section-sub { color: rgba(255,255,255,0.55); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--navy-mid);
+      padding: 2rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .service-card:hover { background: var(--navy-light); }
+
+    .service-card.featured {
+      background: var(--navy-light);
+      border: 1.5px solid var(--gold);
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+
+    .service-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .service-link:hover { color: var(--gold-light); }
+
+    /* ── WHY US ── */
+    .why { background: var(--off-white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .why-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .why-card:hover {
+      box-shadow: 0 8px 32px rgba(15,31,61,0.1);
+      transform: translateY(-3px);
+    }
+
+    .why-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .why-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .why-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── WHO WE HELP ── */
+    .who {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .who-text .section-title { margin-bottom: 1rem; }
+
+    .who-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .who-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border-radius: 12px;
+      padding: 2.5rem;
+      color: var(--white);
+    }
+
+    .who-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--gold-light);
+    }
+
+    .who-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .who-list li {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.75);
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .who-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+      top: 2px;
+    }
+
+    /* ── FAQ ── */
+    .faq { background: var(--off-white); }
+
+    .faq-list {
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--navy);
+      transition: background 0.15s;
+      gap: 1rem;
+    }
+
+    .faq-question:hover { background: var(--off-white); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--gold);
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 1.5rem 1.25rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); }
+
+    .contact-form {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.03em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.7rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text);
+      background: var(--off-white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--navy);
+      background: var(--white);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-check input { margin-top: 3px; accent-color: var(--navy); }
+
+    .form-check label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .contact-form .btn { width: 100%; justify-content: center; text-align: center; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.6);
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .nav-logo { color: var(--white); font-size: 1.2rem; margin-bottom: 1rem; display: block; }
+
+    .footer-brand p {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .footer-brand .contact-info span {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .footer-col ul li a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+    }
+
+    .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label, .hero h1, .hero p, .hero-sub, .hero-checks, .hero .btn {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero h1 { animation-delay: 0.1s; }
+    .hero p { animation-delay: 0.2s; }
+    .hero-sub { animation-delay: 0.25s; }
+    .hero-checks { animation-delay: 0.3s; }
+    .hero .btn { animation-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .who { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Stonebridge Ledger</span>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-gold">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Financial Services · Gilbert, Arizona</p>
+  <h1>Bookkeeping & Financial Advisory Services</h1>
+  <p>We tackle the numbers. You focus on building the business.</p>
+  <p class="hero-sub">Stonebridge Ledger & Advisory Services delivers bookkeeping, accounting, financial reporting and CFO-level guidance for founders and business owners ready to get serious about their finances.</p>
+  <div class="hero-checks">
+    <span class="hero-check">Trusted Service</span>
+    <span class="hero-check">Financial Experts</span>
+    <span class="hero-check">Business Focused</span>
+  </div>
+  <a href="#contact" class="btn btn-gold btn-lg">Contact Us</a>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-value">$2.4B+</div>
+      <div class="stat-label">Assets Under Advisory</div>
+    </div>
+    <div>
+      <div class="stat-value">120+</div>
+      <div class="stat-label">Engagements</div>
+    </div>
+    <div>
+      <div class="stat-value">18</div>
+      <div class="stat-label">Industries Served</div>
+    </div>
+    <div>
+      <div class="stat-value">25 yrs</div>
+      <div class="stat-label">Combined Experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <p class="section-label">Our Services</p>
+    <h2 class="section-title">Everything Your Business Needs to<br>Run Financially Sound</h2>
+    <p class="section-sub">From day-to-day bookkeeping to strategic CFO guidance, we give you the financial clarity your business needs to grow with confidence.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="6" width="28" height="24" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="4" y1="13" x2="32" y2="13" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="13" y1="13" x2="13" y2="30" stroke="#c9a84c" stroke-width="1.5"/>
+        </svg>
+        <h3>Bookkeeping & Accounting</h3>
+        <p>Accurate, timely books so you always know where your business stands. We handle the details so you don't have to.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="12" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M12 18l4 4 8-8" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Accounting Cleanup</h3>
+        <p>Messy books holding you back? We reconcile and restore your financials to a clean, accurate state.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="4,26 12,16 18,20 26,10 32,14" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <h3>Financial Reporting & Analysis</h3>
+        <p>Custom reports and dashboards that translate numbers into actionable insights for your leadership team.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="8" width="24" height="20" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="6" y1="14" x2="30" y2="14" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="12" y1="20" x2="24" y2="20" stroke="#c9a84c" stroke-width="1.5"/>
+          <line x1="12" y1="24" x2="20" y2="24" stroke="#c9a84c" stroke-width="1.5"/>
+        </svg>
+        <h3>Budgeting & Strategic Planning</h3>
+        <p>Build realistic budgets and financial forecasts aligned with your growth goals and market opportunities.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="14" r="6" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M6 30c0-6.627 5.373-10 12-10s12 3.373 12 10" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Payroll Services</h3>
+        <p>Timely, compliant payroll processing so your team gets paid accurately every cycle without the headaches.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card featured">
+        <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,4 32,12 32,24 18,32 4,24 4,12" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <circle cx="18" cy="18" r="4" stroke="#c9a84c" stroke-width="1.5"/>
+        </svg>
+        <h3>Fractional CFO & Outsourced Controller</h3>
+        <p>CFO-level financial leadership without the full-time cost. Strategic oversight, investor readiness, and executive reporting.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="container">
+    <p class="section-label">Why Us</p>
+    <h2 class="section-title">Financial Support That Actually Fits Your Business</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <h3>Full-Spectrum Support</h3>
+        <p>From bookkeeping to CFO strategy, we cover the entire financial function so you never outgrow us.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌐</div>
+        <h3>Gilbert-Based, Remote-Ready</h3>
+        <p>Local roots in the Gilbert, Chandler, Mesa and Tempe area with the capacity to serve clients anywhere.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚀</div>
+        <h3>Built for Startups & Growing Businesses</h3>
+        <p>Our work is tailored to the fast-moving needs of founders — practical, scalable and results-driven.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📞</div>
+        <h3>Start with an Intro Call</h3>
+        <p>No commitments. Just a conversation to understand your situation and see if we're the right fit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<div style="background: var(--white);">
+  <div class="who">
+    <div class="who-text">
+      <p class="section-label">Who We Help</p>
+      <h2 class="section-title">Designed for Founders and Business Owners Who Are Ready to Get Serious About Their Finances</h2>
+      <p>We work with early-stage startups and growing companies who know their financials need attention but don't have the bandwidth to manage it alone.</p>
+      <p>If managing your financials feels like it's holding you back from what you do best, we're built to handle it for you.</p>
+    </div>
+    <div class="who-box">
+      <h3>Our clients are typically:</h3>
+      <ul class="who-list">
+        <li>Founders who have outgrown DIY bookkeeping systems</li>
+        <li>Startups with $250K–$10M ARR needing financial structure</li>
+        <li>Companies preparing for fundraising or acquisition</li>
+        <li>Entrepreneurs looking to scale with confidence</li>
+        <li>Business owners burned by lack of financial visibility</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="section-label">Common Questions</p>
+    <h2 class="section-title">Answers to What Arizona Business Owners Ask Most</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What services does Stonebridge Ledger provide?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Stonebridge Ledger provides bookkeeping, accounting cleanup, financial reporting & analysis, budgeting & strategic planning, payroll services, and fractional CFO / outsourced controller services for businesses of all sizes.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Where is Stonebridge Ledger located?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          We are based in Gilbert, Arizona and serve clients throughout the Greater Phoenix area including Chandler, Mesa, Tempe, and Scottsdale. We also work with remote clients across the United States.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How much do your services cost?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Our pricing is customized based on the size and complexity of your business. We offer transparent, flat-rate monthly packages. The best way to get an accurate quote is to schedule a free intro call with our team.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What types of businesses do you work with?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          We work with startups, small businesses, and growing mid-market companies across 18+ industries. Our sweet spot is founders and entrepreneurs with $250K–$10M in annual revenue who need professional financial support.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container" style="text-align:center; margin-bottom: 3rem;">
+    <h2 class="section-title" style="margin-bottom:0.5rem;">Contact Us</h2>
+  </div>
+  <div class="contact-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Company Name</label>
+        <input type="text" placeholder="Your company" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@company.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="(480) 000-0000" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Service of Interest</label>
+      <select>
+        <option value="">Select a service...</option>
+        <option>Bookkeeping & Accounting</option>
+        <option>Accounting Cleanup</option>
+        <option>Financial Reporting & Analysis</option>
+        <option>Budgeting & Strategic Planning</option>
+        <option>Payroll Services</option>
+        <option>Fractional CFO / Outsourced Controller</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea placeholder="Tell us about your business and what you need help with..."></textarea>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" id="consent" />
+      <label for="consent">I agree to be contacted about my inquiry and understand my data will be handled in accordance with your privacy policy.</label>
+    </div>
+    <a href="mailto:info@stonebridgeledger.com" class="btn btn-gold btn-lg">Send Message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Stonebridge Ledger</span>
+      <p>Stonebridge Ledger & Advisory Services — bookkeeping and financial advisory for founders and growing businesses in Arizona and beyond.</p>
+      <div class="contact-info">
+        <span>📍 Gilbert, Arizona</span>
+        <span>📧 info@stonebridgeledger.com</span>
+        <span>📞 (480) 000-0000</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Bookkeeping & Accounting</a></li>
+        <li><a href="#services">Accounting Cleanup</a></li>
+        <li><a href="#services">Financial Reporting</a></li>
+        <li><a href="#services">Budgeting & Planning</a></li>
+        <li><a href="#services">Payroll Services</a></li>
+        <li><a href="#services">Fractional CFO</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Stonebridge Ledger & Advisory Services. All rights reserved.</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .why-card, .stat-value').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
